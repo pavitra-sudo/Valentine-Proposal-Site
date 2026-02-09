@@ -1,0 +1,93 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: var(--spacing-xl) 0;
+}
+
+.hero-content {
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart-icon {
+    font-size: 5rem;
+    display: inline-block;
+    filter: drop-shadow(0 0 20px rgba(255, 105, 135, 0.6));
+}
+
+.hero-title {
+    text-shadow: 2px 2px 4px rgba(255, 105, 135, 0.2);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+.tagline {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    font-weight: 500;
+    color: var(--color-primary);
+    font-size: 1.125rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Couple silhouette decoration */
+.hero::before {
+    content: '';
+    position: absolute;
+    left: 5%;
+    bottom: 10%;
+    width: 200px;
+    height: 300px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300"><path d="M80 150 Q 100 100 120 150 L 120 250 L 80 250 Z" fill="rgba(255,105,135,0.1)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 90vh;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .heart-icon {
+        font-size: 3.5rem;
+    }
+}
