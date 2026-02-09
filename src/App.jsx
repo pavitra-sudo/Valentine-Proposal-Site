@@ -13,10 +13,6 @@ function LandingPage() {
     return (
         <>
             <Hero />
-            <Features />
-            <HowItWorks />
-            <CTA />
-            <Footer />
         </>
     )
 }
