@@ -76,17 +76,16 @@
     .hero {
         min-height: 90vh;
     }
-    
+
     .hero-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .hero-buttons .btn {
-        width: 100%;
         max-width: 300px;
     }
-    
+
     .heart-icon {
         font-size: 3.5rem;
     }
