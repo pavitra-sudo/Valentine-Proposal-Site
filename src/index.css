@@ -6,41 +6,41 @@
   --color-primary-light: hsl(350, 100%, 75%);
   --color-secondary: hsl(340, 100%, 70%);
   --color-accent: hsl(10, 100%, 60%);
-  
+
   --color-bg-gradient-start: hsl(350, 100%, 95%);
   --color-bg-gradient-end: hsl(0, 100%, 97%);
   --color-bg-overlay: hsla(350, 100%, 98%, 0.9);
-  
+
   --color-text-primary: hsl(340, 60%, 25%);
   --color-text-secondary: hsl(340, 50%, 40%);
   --color-text-light: hsl(350, 100%, 95%);
-  
+
   --color-card-bg: hsla(0, 100%, 100%, 0.85);
   --color-card-border: hsla(350, 100%, 85%, 0.5);
-  
+
   /* Shadows */
   --shadow-sm: 0 2px 8px hsla(350, 80%, 60%, 0.15);
   --shadow-md: 0 4px 16px hsla(350, 80%, 60%, 0.2);
   --shadow-lg: 0 8px 32px hsla(350, 80%, 60%, 0.25);
   --shadow-glow: 0 0 20px hsla(350, 100%, 70%, 0.4);
-  
+
   /* Typography */
   --font-heading: 'Dancing Script', cursive;
   --font-body: 'Outfit', sans-serif;
-  
+
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2.5rem;
   --spacing-xl: 4rem;
-  
+
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-full: 9999px;
-  
+
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
@@ -61,6 +61,8 @@ body {
   overflow-x: hidden;
   background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
   min-height: 100vh;
+  /* Force light mode - prevent dark mode from changing colors */
+  color-scheme: light;
 }
 
 /* ===== ANIMATED BACKGROUND ===== */
@@ -73,6 +75,11 @@ body {
   z-index: -1;
   overflow: hidden;
   background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
+  /* Responsive background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .floating-hearts {
@@ -94,12 +101,15 @@ body {
     transform: translateY(100vh) rotate(0deg);
     opacity: 0;
   }
+
   10% {
     opacity: 0.15;
   }
+
   90% {
     opacity: 0.15;
   }
+
   100% {
     transform: translateY(-100px) rotate(360deg);
     opacity: 0;
@@ -107,7 +117,9 @@ body {
 }
 
 /* ===== TYPOGRAPHY ===== */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
@@ -230,13 +242,29 @@ p {
   text-align: center;
 }
 
-.mb-sm { margin-bottom: var(--spacing-sm); }
-.mb-md { margin-bottom: var(--spacing-md); }
-.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-sm {
+  margin-bottom: var(--spacing-sm);
+}
 
-.mt-sm { margin-top: var(--spacing-sm); }
-.mt-md { margin-top: var(--spacing-md); }
-.mt-lg { margin-top: var(--spacing-lg); }
+.mb-md {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mt-sm {
+  margin-top: var(--spacing-sm);
+}
+
+.mt-md {
+  margin-top: var(--spacing-md);
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
@@ -244,6 +272,7 @@ p {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -251,9 +280,12 @@ p {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
@@ -273,12 +305,15 @@ p {
     --spacing-xl: 2.5rem;
     --spacing-lg: 2rem;
   }
-  
+
   .btn {
     padding: 0.875rem 2rem;
     font-size: 1rem;
+    min-width: 200px;
+    justify-content: center;
+    text-align: center;
   }
-  
+
   .card {
     padding: var(--spacing-md);
   }
@@ -288,5 +323,11 @@ p {
   :root {
     --spacing-xl: 2rem;
     --spacing-lg: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    min-width: 180px;
   }
 }
