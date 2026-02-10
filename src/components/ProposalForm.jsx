@@ -24,6 +24,12 @@ const ProposalForm = () => {
         navigate('/preview', { state: formData })
     }
 
+    const handleGenerateLink = (e) => {
+        e.preventDefault()
+        // TODO: Connect to backend to generate actual link
+        alert('🎉 Your link is now generated!')
+    }
+
     return (
         <section className="proposal-form-section section">
             <div className="container">
@@ -91,6 +97,9 @@ const ProposalForm = () => {
                         </div>
 
                         <div className="form-actions">
+                            <button type="button" className="btn btn-secondary" onClick={handleGenerateLink}>
+                                Generate Link 🔗
+                            </button>
                             <button type="submit" className="btn btn-primary">
                                 Preview Page
                             </button>

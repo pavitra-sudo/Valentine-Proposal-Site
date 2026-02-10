@@ -170,6 +170,9 @@
 
 .preview-footer {
     margin-top: var(--spacing-xl);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Decorative hearts */
@@ -311,7 +314,6 @@
 
     .btn-yes,
     .btn-no {
-        width: 100%;
         max-width: 250px;
         padding: 0.875rem 2rem;
         font-size: 1.125rem;

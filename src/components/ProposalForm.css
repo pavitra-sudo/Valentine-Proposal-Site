@@ -94,13 +94,16 @@
 .form-actions {
     display: flex;
     justify-content: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
     margin-top: var(--spacing-xl);
 }
 
 .form-actions .btn {
-    min-width: 250px;
-    padding: 1.125rem 3rem;
-    font-size: 1.25rem;
+    min-width: 200px;
+    max-width: 250px;
+    padding: 1.125rem 2.5rem;
+    font-size: 1.125rem;
 }
 
 /* Decorative elements */
@@ -202,6 +205,11 @@
         padding: 0.875rem 1rem;
     }
 
+    .form-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .form-actions .btn {
         min-width: 200px;
         padding: 1rem 2rem;
@@ -215,7 +223,6 @@
     }
 
     .form-actions .btn {
-        width: 100%;
-        min-width: auto;
+        min-width: 180px;
     }
 }
