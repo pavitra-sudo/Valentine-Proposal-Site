@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './AnimatedBackground.css'
+import bgImage from '/background.png' 
 
 const AnimatedBackground = () => {
     const [hearts, setHearts] = useState([])
@@ -10,7 +11,7 @@ const AnimatedBackground = () => {
             heartArray.push({
                 id: i,
                 left: Math.random() * 100,
-                delay: Math.random() * 15,
+                delay: Math.random() * 5,
                 duration: 15 + Math.random() * 10,
                 size: 0.8 + Math.random() * 1.2
             })
@@ -19,7 +20,10 @@ const AnimatedBackground = () => {
     }, [])
 
     return (
-        <div className="animated-bg">
+        <div
+            className="animated-bg"
+            style={{ backgroundImage: `url(${bgImage})` }}
+        >
             <div className="floating-hearts">
                 {hearts.map(heart => (
                     <div
