@@ -77,9 +77,8 @@ body {
   background: linear-gradient(135deg, var(--color-bg-gradient-start), var(--color-bg-gradient-end));
   /* Responsive background image */
   background-size: cover;
-  background-position: center;
+  background-position: left;
   background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 .floating-hearts {
