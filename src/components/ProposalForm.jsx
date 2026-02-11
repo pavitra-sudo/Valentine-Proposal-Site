@@ -6,8 +6,8 @@ const ProposalForm = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: '',
-        yourName: '',
-        partnerName: '',
+        sender: '',
+        receiver: '',
         message: ''
     })
 
@@ -24,11 +24,46 @@ const ProposalForm = () => {
         navigate('/preview', { state: formData })
     }
 
-    const handleGenerateLink = (e) => {
-        e.preventDefault()
-        // TODO: Connect to backend to generate actual link
-        alert('🎉 Your link is now generated!')
-    }
+    const handleGenerateLink = async (e) => {
+        e.preventDefault();
+
+        console.log("📩 Form data before sending:", formData);
+
+        try {
+            console.log("🚀 Sending request to backend...");
+
+            const response = await fetch("http://localhost:8080/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: formData.email,
+                    sender: formData.sender,
+                    receiver: formData.receiver,
+                    message: formData.message
+                }),
+            });
+
+            console.log("📡 Raw response:", response);
+            console.log("📡 Status:", response.status);
+
+            if (!response.ok) {
+                const text = await response.text();
+                console.error("❌ Backend error response:", text);
+                throw new Error(text);
+            }
+
+            const data = await response.json();
+            console.log("✅ Parsed JSON:", data);
+
+            alert(`🎉 Your link is generated: ${data.link}`);
+
+        } catch (error) {
+            console.error("🔥 Fetch failed:", error);
+            alert("❌ Something went wrong!");
+        }
+    };
 
     return (
         <section className="proposal-form-section section">
@@ -61,9 +96,9 @@ const ProposalForm = () => {
                             <label htmlFor="yourName">Your Name</label>
                             <input
                                 type="text"
-                                id="yourName"
-                                name="yourName"
-                                value={formData.yourName}
+                                id="sender"
+                                name="sender"
+                                value={formData.sender}
                                 onChange={handleChange}
                                 placeholder="Enter your name"
                                 required
@@ -74,9 +109,9 @@ const ProposalForm = () => {
                             <label htmlFor="partnerName">Partner Name</label>
                             <input
                                 type="text"
-                                id="partnerName"
-                                name="partnerName"
-                                value={formData.partnerName}
+                                id="receiver"
+                                name="receiver"
+                                value={formData.receiver}
                                 onChange={handleChange}
                                 placeholder="Enter your partner's name"
                                 required
