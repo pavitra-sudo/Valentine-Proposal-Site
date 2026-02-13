@@ -6,10 +6,12 @@ const ProposalForm = () => {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: '',
-        sender: '',
-        receiver: '',
+        yourName: '',
+        partnerName: '',
         message: ''
     })
+    const [generatedLink, setGeneratedLink] = useState('')
+    const [isGenerating, setIsGenerating] = useState(false)
 
     const handleChange = (e) => {
         setFormData({
@@ -25,45 +27,49 @@ const ProposalForm = () => {
     }
 
     const handleGenerateLink = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        console.log("📩 Form data before sending:", formData);
+        // Validate form
+        if (!formData.yourName || !formData.partnerName || !formData.message) {
+            alert('Please fill in all required fields')
+            return
+        }
+
+        setIsGenerating(true)
 
         try {
-            console.log("🚀 Sending request to backend...");
-
-            const response = await fetch("http://localhost:8080/", {
-                method: "POST",
+            const response = await fetch('http://localhost:3001/api/proposals', {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    email: formData.email,
-                    sender: formData.sender,
-                    receiver: formData.receiver,
+                    partnerName: formData.partnerName,
+                    yourName: formData.yourName,
                     message: formData.message
-                }),
-            });
+                })
+            })
 
-            console.log("📡 Raw response:", response);
-            console.log("📡 Status:", response.status);
+            const data = await response.json()
 
-            if (!response.ok) {
-                const text = await response.text();
-                console.error("❌ Backend error response:", text);
-                throw new Error(text);
+            if (data.success) {
+                setGeneratedLink(data.url)
+                alert(`🎉 Your link is generated!\n\n${data.url}\n\nCopy and share it with your partner!`)
+            } else {
+                alert('Failed to generate link. Please try again.')
             }
-
-            const data = await response.json();
-            console.log("✅ Parsed JSON:", data);
-
-            alert(`🎉 Your link is generated: ${data.link}`);
-
         } catch (error) {
-            console.error("🔥 Fetch failed:", error);
-            alert("❌ Something went wrong!");
+            console.error('Error generating link:', error)
+            alert('Failed to connect to backend. Make sure the backend server is running.')
+        } finally {
+            setIsGenerating(false)
         }
-    };
+    }
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(generatedLink)
+        alert('Link copied to clipboard! 📋')
+    }
 
     return (
         <section className="proposal-form-section section">
@@ -96,9 +102,9 @@ const ProposalForm = () => {
                             <label htmlFor="yourName">Your Name</label>
                             <input
                                 type="text"
-                                id="sender"
-                                name="sender"
-                                value={formData.sender}
+                                id="yourName"
+                                name="yourName"
+                                value={formData.yourName}
                                 onChange={handleChange}
                                 placeholder="Enter your name"
                                 required
@@ -109,9 +115,9 @@ const ProposalForm = () => {
                             <label htmlFor="partnerName">Partner Name</label>
                             <input
                                 type="text"
-                                id="receiver"
-                                name="receiver"
-                                value={formData.receiver}
+                                id="partnerName"
+                                name="partnerName"
+                                value={formData.partnerName}
                                 onChange={handleChange}
                                 placeholder="Enter your partner's name"
                                 required
@@ -132,13 +138,42 @@ const ProposalForm = () => {
                         </div>
 
                         <div className="form-actions">
-                            <button type="button" className="btn btn-secondary" onClick={handleGenerateLink}>
-                                Generate Link 🔗
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={handleGenerateLink}
+                                disabled={isGenerating}
+                            >
+                                {isGenerating ? 'Generating...' : 'Generate Link 🔗'}
                             </button>
                             <button type="submit" className="btn btn-primary">
                                 Preview Page
                             </button>
                         </div>
+
+                        {generatedLink && (
+                            <div className="generated-link-container">
+                                <h3>✨ Your Shareable Link:</h3>
+                                <div className="link-display">
+                                    <input
+                                        type="text"
+                                        value={generatedLink}
+                                        readOnly
+                                        className="link-input"
+                                    />
+                                    <button
+                                        type="button"
+                                        className="btn btn-copy"
+                                        onClick={copyToClipboard}
+                                    >
+                                        Copy 📋
+                                    </button>
+                                </div>
+                                <p className="link-instruction">
+                                    Share this link with your partner! 💕
+                                </p>
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>
