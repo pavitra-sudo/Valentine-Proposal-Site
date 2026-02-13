@@ -10,6 +10,7 @@ const ProposalForm = () => {
         receiver: '',
         message: ''
     })
+    const [generatedLink, setGeneratedLink] = useState('')
 
     const handleChange = (e) => {
         setFormData({
@@ -57,7 +58,27 @@ const ProposalForm = () => {
             const data = await response.json();
             console.log("✅ Parsed JSON:", data);
 
-            alert(`🎉 Your link is generated: ${data.link}`);
+            // Store the generated link - construct frontend URL
+            // Backend returns a link like "http://localhost:8080/p/ID"
+            // We want "http://localhost:5173/p/ID" (current frontend origin)
+
+            // Extract ID from the backend link or response
+            // Assuming the backend link is the only source of ID if not returned separately
+            let proposalId = '';
+            if (data.link) {
+                const parts = data.link.split('/');
+                proposalId = parts[parts.length - 1]; // Get the last part (the ID)
+            } else if (data.id) {
+                proposalId = data.id;
+            }
+
+            if (proposalId) {
+                const frontendLink = `${window.location.origin}/p/${proposalId}`;
+                setGeneratedLink(frontendLink);
+                alert(`🎉 Your link is generated: ${frontendLink}`);
+            } else {
+                alert("❌ Could not generate link - ID missing from backend response!");
+            }
 
         } catch (error) {
             console.error("🔥 Fetch failed:", error);
@@ -93,7 +114,7 @@ const ProposalForm = () => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="yourName">Your Name</label>
+                            <label htmlFor="sender">Your Name</label>
                             <input
                                 type="text"
                                 id="sender"
@@ -106,7 +127,7 @@ const ProposalForm = () => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="partnerName">Partner Name</label>
+                            <label htmlFor="receiver">Partner Name</label>
                             <input
                                 type="text"
                                 id="receiver"

@@ -1,0 +1,394 @@
+.yes-response {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #6c5b7b 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.yes-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+/* Floating Hearts Animation */
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatUp 6s infinite ease-in-out;
+    opacity: 0;
+}
+
+.heart-1 {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.heart-2 {
+    left: 25%;
+    animation-delay: 1s;
+}
+
+.heart-3 {
+    left: 40%;
+    animation-delay: 2s;
+}
+
+.heart-4 {
+    left: 55%;
+    animation-delay: 0.5s;
+}
+
+.heart-5 {
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+.heart-6 {
+    left: 85%;
+    animation-delay: 2.5s;
+}
+
+.heart-7 {
+    left: 15%;
+    animation-delay: 3s;
+}
+
+.heart-8 {
+    left: 90%;
+    animation-delay: 3.5s;
+}
+
+@keyframes floatUp {
+    0% {
+        bottom: -10%;
+        opacity: 0;
+        transform: translateX(0) rotate(0deg);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.8;
+    }
+
+    100% {
+        bottom: 110%;
+        opacity: 0;
+        transform: translateX(20px) rotate(360deg);
+    }
+}
+
+/* Confetti Animation */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -10%;
+    animation: confettiFall 4s infinite ease-in;
+    opacity: 0;
+}
+
+.confetti-1 {
+    left: 10%;
+    background: #ff6b9d;
+    animation-delay: 0s;
+}
+
+.confetti-2 {
+    left: 20%;
+    background: #ffd93d;
+    animation-delay: 0.3s;
+}
+
+.confetti-3 {
+    left: 30%;
+    background: #6bcf7f;
+    animation-delay: 0.6s;
+}
+
+.confetti-4 {
+    left: 40%;
+    background: #4d96ff;
+    animation-delay: 0.9s;
+}
+
+.confetti-5 {
+    left: 50%;
+    background: #c06c84;
+    animation-delay: 1.2s;
+}
+
+.confetti-6 {
+    left: 60%;
+    background: #ff6b9d;
+    animation-delay: 1.5s;
+}
+
+.confetti-7 {
+    left: 70%;
+    background: #ffd93d;
+    animation-delay: 1.8s;
+}
+
+.confetti-8 {
+    left: 80%;
+    background: #6bcf7f;
+    animation-delay: 2.1s;
+}
+
+.confetti-9 {
+    left: 90%;
+    background: #4d96ff;
+    animation-delay: 2.4s;
+}
+
+.confetti-10 {
+    left: 95%;
+    background: #c06c84;
+    animation-delay: 2.7s;
+}
+
+@keyframes confettiFall {
+    0% {
+        top: -10%;
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0.7;
+    }
+
+    100% {
+        top: 110%;
+        opacity: 0;
+        transform: rotate(720deg);
+    }
+}
+
+/* Content Styling */
+.yes-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.celebration-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.yes-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.gradient-text-vibrant {
+    background: linear-gradient(135deg, #ff6b9d, #c06c84, #6c5b7b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+.yes-hearts {
+    margin: 2rem 0;
+}
+
+.big-heart {
+    font-size: 4rem;
+    display: inline-block;
+}
+
+.pulse-heart {
+    animation: pulseHeart 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseHeart {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+.card-vibrant {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(192, 108, 132, 0.1));
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+}
+
+.message-intro {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #c06c84;
+    margin-bottom: 1rem;
+}
+
+.message-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.love-quote {
+    font-size: 1rem;
+    font-style: italic;
+    color: #6c5b7b;
+    padding: 1rem;
+    border-left: 4px solid #ff6b9d;
+    background: rgba(255, 107, 157, 0.05);
+    border-radius: 8px;
+}
+
+.celebration-footer {
+    margin-top: 2rem;
+    position: relative;
+}
+
+.sparkle {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+.sparkle-1 {
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.sparkle-2 {
+    left: 50%;
+    animation-delay: 0.7s;
+}
+
+.sparkle-3 {
+    left: 80%;
+    animation-delay: 1.4s;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.5) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.5) rotate(180deg);
+    }
+}
+
+.footer-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #c06c84;
+    margin-top: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .yes-title {
+        font-size: 2.5rem;
+    }
+
+    .celebration-icon {
+        font-size: 3.5rem;
+    }
+
+    .big-heart {
+        font-size: 3rem;
+    }
+
+    .yes-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .message-intro {
+        font-size: 1.3rem;
+    }
+
+    .message-body {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .yes-title {
+        font-size: 2rem;
+    }
+
+    .celebration-icon {
+        font-size: 2.5rem;
+    }
+
+    .big-heart {
+        font-size: 2.5rem;
+    }
+
+    .card-vibrant {
+        padding: 1.5rem;
+    }
+
+    .heart {
+        font-size: 1.5rem;
+    }
+}
