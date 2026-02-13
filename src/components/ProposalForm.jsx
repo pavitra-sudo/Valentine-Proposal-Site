@@ -86,11 +86,6 @@ const ProposalForm = () => {
         }
     };
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(generatedLink)
-        alert('Link copied to clipboard! 📋')
-    }
-
     return (
         <section className="proposal-form-section section">
             <div className="container">
@@ -165,30 +160,6 @@ const ProposalForm = () => {
                                 Preview Page
                             </button>
                         </div>
-
-                        {generatedLink && (
-                            <div className="generated-link-container">
-                                <h3>✨ Your Shareable Link:</h3>
-                                <div className="link-display">
-                                    <input
-                                        type="text"
-                                        value={generatedLink}
-                                        readOnly
-                                        className="link-input"
-                                    />
-                                    <button
-                                        type="button"
-                                        className="btn btn-copy"
-                                        onClick={copyToClipboard}
-                                    >
-                                        Copy 📋
-                                    </button>
-                                </div>
-                                <p className="link-instruction">
-                                    Share this link with your partner! 💕
-                                </p>
-                            </div>
-                        )}
                     </form>
                 </div>
             </div>
