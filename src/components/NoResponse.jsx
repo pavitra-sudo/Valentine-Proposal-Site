@@ -45,7 +45,7 @@ const NoResponse = () => {
                         </div>
 
                         <h1 className="no-title grey-text">
-                            {formData.partnerName || 'They'} Said No
+                            {formData.receiver || 'They'} Said No
                         </h1>
 
                         <div className="broken-heart-visual">
@@ -59,7 +59,7 @@ const NoResponse = () => {
                                 Sometimes love doesn't go as planned...
                             </p>
                             <p className="message-body-sad">
-                                {formData.yourName || 'You'}, we know this isn't the answer you hoped for.
+                                {formData.sender || 'You'}, we know this isn't the answer you hoped for.
                                 Remember that rejection is redirection. Your heart is brave for taking the chance,
                                 and the right person will see your worth.
                             </p>

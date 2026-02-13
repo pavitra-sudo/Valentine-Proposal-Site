@@ -41,7 +41,7 @@ const YesResponse = () => {
                         </div>
 
                         <h1 className="yes-title gradient-text-vibrant">
-                            {formData.partnerName || 'They'} Said Yes!
+                            {formData.receiver || 'They'} Said Yes!
                         </h1>
 
                         <div className="yes-hearts">
@@ -50,7 +50,7 @@ const YesResponse = () => {
 
                         <div className="yes-message card-vibrant">
                             <p className="message-intro">
-                                Congratulations, {formData.yourName || 'You'}! 🎊
+                                Congratulations, {formData.sender || 'You'}! 🎊
                             </p>
                             <p className="message-body">
                                 Your Valentine said YES! This is the beginning of something beautiful.

@@ -16,64 +16,35 @@ const ProposalPage = () => {
 
     const fetchProposal = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/api/proposals/${proposalId}`)
-            const data = await response.json()
+            // Backend is at http://localhost:8080/:code
+            const response = await fetch(`http://localhost:8080/${proposalId}`)
+            const jsonData = await response.json()
 
-            if (data.success) {
-                setProposal(data.proposal)
-                // Check if already responded
-                if (data.proposal.response) {
-                    setHasResponded(true)
-                    // Redirect to appropriate response page
-                    setTimeout(() => {
-                        navigate(`/response/${data.proposal.response}`, {
-                            state: {
-                                partnerName: data.proposal.partnerName,
-                                yourName: data.proposal.yourName,
-                                message: data.proposal.message
-                            }
-                        })
-                    }, 2000)
-                }
+            if (jsonData.data) {
+                // Backend returns { data: { sender:..., receiver:..., ... } }
+                setProposal(jsonData.data)
+
+                // Note: Backend doesn't store responses, so we can't check if already responded
             } else {
                 setError('Proposal not found')
             }
         } catch (err) {
             console.error('Error fetching proposal:', err)
-            setError('Failed to load proposal. Make sure the backend server is running.')
+            setError('Failed to load proposal. Make sure the backend server as http://localhost:8080 is running.')
         } finally {
             setLoading(false)
         }
     }
 
-    const handleResponse = async (response) => {
-        try {
-            const res = await fetch(`http://localhost:3001/api/proposals/${proposalId}/response`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ response })
-            })
-
-            const data = await res.json()
-
-            if (data.success) {
-                // Navigate to response page
-                navigate(`/response/${response}`, {
-                    state: {
-                        partnerName: proposal.partnerName,
-                        yourName: proposal.yourName,
-                        message: proposal.message
-                    }
-                })
-            } else {
-                alert(data.error || 'Failed to submit response')
+    const handleResponse = (response) => {
+        // Backend doesn't support saving responses, so just navigate locally
+        navigate(`/response/${response}`, {
+            state: {
+                receiver: proposal.receiver,
+                sender: proposal.sender,
+                message: proposal.message
             }
-        } catch (err) {
-            console.error('Error submitting response:', err)
-            alert('Failed to submit response. Please try again.')
-        }
+        })
     }
 
     const handleYes = () => handleResponse('yes')
@@ -134,13 +105,13 @@ const ProposalPage = () => {
                             <span className="heart-float">💕</span>
                         </div>
                         <h1 className="preview-name gradient-text">
-                            {proposal.partnerName},
+                            {proposal.receiver},
                         </h1>
                         <h2 className="preview-question">
                             Will You Be My Valentine? 💝
                         </h2>
                         <p className="preview-signature">
-                            ~ Forever Yours, {proposal.yourName} ~
+                            ~ Forever Yours, {proposal.sender} ~
                         </p>
                     </div>
 
