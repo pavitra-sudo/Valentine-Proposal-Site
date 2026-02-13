@@ -10,6 +10,8 @@ const ProposalForm = () => {
         partnerName: '',
         message: ''
     })
+    const [generatedLink, setGeneratedLink] = useState('')
+    const [isGenerating, setIsGenerating] = useState(false)
 
     const handleChange = (e) => {
         setFormData({
@@ -24,10 +26,49 @@ const ProposalForm = () => {
         navigate('/preview', { state: formData })
     }
 
-    const handleGenerateLink = (e) => {
+    const handleGenerateLink = async (e) => {
         e.preventDefault()
-        // TODO: Connect to backend to generate actual link
-        alert('🎉 Your link is now generated!')
+
+        // Validate form
+        if (!formData.yourName || !formData.partnerName || !formData.message) {
+            alert('Please fill in all required fields')
+            return
+        }
+
+        setIsGenerating(true)
+
+        try {
+            const response = await fetch('http://localhost:3001/api/proposals', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    partnerName: formData.partnerName,
+                    yourName: formData.yourName,
+                    message: formData.message
+                })
+            })
+
+            const data = await response.json()
+
+            if (data.success) {
+                setGeneratedLink(data.url)
+                alert(`🎉 Your link is generated!\n\n${data.url}\n\nCopy and share it with your partner!`)
+            } else {
+                alert('Failed to generate link. Please try again.')
+            }
+        } catch (error) {
+            console.error('Error generating link:', error)
+            alert('Failed to connect to backend. Make sure the backend server is running.')
+        } finally {
+            setIsGenerating(false)
+        }
+    }
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(generatedLink)
+        alert('Link copied to clipboard! 📋')
     }
 
     return (
@@ -97,13 +138,42 @@ const ProposalForm = () => {
                         </div>
 
                         <div className="form-actions">
-                            <button type="button" className="btn btn-secondary" onClick={handleGenerateLink}>
-                                Generate Link 🔗
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={handleGenerateLink}
+                                disabled={isGenerating}
+                            >
+                                {isGenerating ? 'Generating...' : 'Generate Link 🔗'}
                             </button>
                             <button type="submit" className="btn btn-primary">
                                 Preview Page
                             </button>
                         </div>
+
+                        {generatedLink && (
+                            <div className="generated-link-container">
+                                <h3>✨ Your Shareable Link:</h3>
+                                <div className="link-display">
+                                    <input
+                                        type="text"
+                                        value={generatedLink}
+                                        readOnly
+                                        className="link-input"
+                                    />
+                                    <button
+                                        type="button"
+                                        className="btn btn-copy"
+                                        onClick={copyToClipboard}
+                                    >
+                                        Copy 📋
+                                    </button>
+                                </div>
+                                <p className="link-instruction">
+                                    Share this link with your partner! 💕
+                                </p>
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>

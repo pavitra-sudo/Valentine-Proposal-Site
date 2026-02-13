@@ -7,6 +7,9 @@ import Footer from './components/Footer'
 import AnimatedBackground from './components/AnimatedBackground'
 import ProposalForm from './components/ProposalForm'
 import PreviewPage from './components/PreviewPage'
+import ProposalPage from './components/ProposalPage'
+import YesResponse from './components/YesResponse'
+import NoResponse from './components/NoResponse'
 import './App.css'
 
 function LandingPage() {
@@ -26,6 +29,9 @@ function App() {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/create" element={<ProposalForm />} />
                     <Route path="/preview" element={<PreviewPage />} />
+                    <Route path="/p/:proposalId" element={<ProposalPage />} />
+                    <Route path="/response/yes" element={<YesResponse />} />
+                    <Route path="/response/no" element={<NoResponse />} />
                 </Routes>
             </div>
         </Router>

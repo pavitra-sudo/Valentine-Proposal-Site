@@ -7,15 +7,11 @@ const PreviewPage = () => {
     const formData = location.state || {}
 
     const handleYes = () => {
-        // TODO: Handle "Yes" response
-        console.log('User clicked Yes!')
-        alert('Yay! 💕')
+        navigate('/response/yes', { state: formData })
     }
 
     const handleNo = () => {
-        // TODO: Handle "No" response
-        console.log('User clicked No')
-        alert('Oh no... 💔')
+        navigate('/response/no', { state: formData })
     }
 
     return (
